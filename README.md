@@ -31,9 +31,3 @@ npm run dev -- --host
 ```
 
 Open the Vite dev URL (typically `http://localhost:5173`) in your browser.
-
-## Deploying frontend and backend separately
-
-- **Frontend (e.g. Vercel):** Set root directory to `frontend`. Add env var **`VITE_API_BASE_URL`** = your backend URL (no trailing slash), e.g. `https://your-backend.railway.app`.
-- **Backend (e.g. Railway, Render):** Add env var **`CORS_ORIGINS`** = comma-separated frontend origins, e.g. `https://yourapp.vercel.app`. Optional **`PORT`** if the host uses it (e.g. Railway).
-- See `frontend/.env.example` and `backend/.env.example` for details.
