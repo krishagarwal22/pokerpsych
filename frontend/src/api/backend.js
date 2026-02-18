@@ -1,5 +1,12 @@
+import { getApiBaseUrl } from '../config'
+
+function apiUrl(path) {
+  const base = getApiBaseUrl()
+  return base ? `${base}${path}` : path
+}
+
 async function jsonFetch(url, options = {}) {
-  const res = await fetch(url, {
+  const res = await fetch(apiUrl(url), {
     headers: { 'Content-Type': 'application/json', ...(options.headers || {}) },
     ...options,
   })
@@ -160,7 +167,7 @@ export async function setBotAggression(seat, aggression) {
 
 // Coach chatbot
 export async function sendCoachMessage(messages, profile, moves) {
-  const res = await fetch('/api/coach/chat', {
+  const res = await fetch(apiUrl('/api/coach/chat'), {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ messages, profile, moves }),
@@ -173,7 +180,7 @@ export async function sendCoachMessage(messages, profile, moves) {
 export async function transcribeChunk(blob) {
   const fd = new FormData()
   fd.append('chunk', blob, 'chunk.webm')
-  const res = await fetch('/api/transcribe_chunk', { method: 'POST', body: fd })
+  const res = await fetch(apiUrl('/api/transcribe_chunk'), { method: 'POST', body: fd })
   if (!res.ok) return null
   return res.json()
 }

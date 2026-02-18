@@ -20,6 +20,11 @@ import cv2
 from flask import Flask, Response, jsonify, request
 from ultralytics import YOLO
 
+try:
+    from flask_cors import CORS
+except ImportError:
+    CORS = None
+
 import bot_game
 import card_logger
 import equitypredict
@@ -400,6 +405,13 @@ def run_webcam_worker(shared_state: dict, stop_event: threading.Event):
 
 
 app = Flask(__name__)
+
+# CORS: allow frontend origin when deployed separately (e.g. Vercel frontend + separate backend).
+# Set CORS_ORIGINS to a comma-separated list, e.g. "https://yourapp.vercel.app,http://localhost:5173".
+if CORS:
+    origins = os.environ.get("CORS_ORIGINS", "http://localhost:5173").strip()
+    origins_list = [o.strip() for o in origins.split(",") if o.strip()]
+    CORS(app, origins=origins_list)
 
 shared_state = {
     "detected_cards": [],
@@ -1340,8 +1352,9 @@ def main():
     clear_hand_state_file()  # clear card state on restart so devs see fresh state
     worker = threading.Thread(target=run_webcam_worker, args=(shared_state, stop_event), daemon=True)
     worker.start()
+    port = int(os.environ.get("PORT", "5001"))
     try:
-        app.run(host="0.0.0.0", port=5001, threaded=True, use_reloader=False)
+        app.run(host="0.0.0.0", port=port, threaded=True, use_reloader=False)
     finally:
         stop_event.set()
 

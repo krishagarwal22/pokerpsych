@@ -33,6 +33,7 @@ import PotOddsPanel from './components/PotOddsPanel'
 import BotGameView from './components/BotGameView'
 import TableSimulatorView from './components/TableSimulatorView'
 import VideoFeed from './components/VideoFeed'
+import { getVideoFeedUrl } from './config'
 
 const SMALL_BLIND = 0.1
 const BIG_BLIND = 0.2
@@ -286,7 +287,7 @@ function App() {
                 <Box sx={{ mt: 1.5 }}>
                   <CameraSelector />
                   <Box sx={{ mt: 0.5 }}>
-                    <VideoFeed src="/video_feed" />
+                    <VideoFeed src={getVideoFeedUrl()} />
                   </Box>
                 </Box>
               </Paper>
