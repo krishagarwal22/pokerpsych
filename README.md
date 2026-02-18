@@ -22,8 +22,6 @@ python -m pip install -r backend/requirements.txt
 python backend/app_web.py
 ```
 
-The backend serves JSON APIs and an MJPEG stream at `/video_feed`.
-
 ## Run frontend (React)
 
 ```bash
@@ -33,13 +31,3 @@ npm run dev -- --host
 ```
 
 Open the Vite dev URL (typically `http://localhost:5173`) in your browser.
-
-## Optional: Tk desktop UI
-
-```bash
-python backend/app.py
-```
-
-## Model file
-
-The model file `yolov8m_synthetic.pt` remains in the repo root and is loaded by the backend.
