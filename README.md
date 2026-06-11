@@ -6,6 +6,9 @@ Players use Poker Psych to improve decision-making and risk taking, while psychi
 
 All analysis and agent coordination are powered by a Daedalus MCP server, with a computer vision model handling live card detection and tracking.
 
+# Demo
+[youtube.com/watch?v=9gTTuLwwbLA](https://www.youtube.com/watch?v=9gTTuLwwbLA)
+
 # Setup Instructions
 
 Flask backend + React frontend.
